@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>PDF Form Filler — Fill In PDF Forms Online, Free &amp; Private | S3eidat Tools</title>
+<meta name="description" content="Fill in fillable PDF forms in your browser: text, checkboxes, radio buttons, dropdowns and lists, with a live page preview. Optionally flatten, then download. Nothing uploaded.">
+<meta property="og:title" content="PDF Form Filler — fill in PDF forms in your browser">
+<meta property="og:description" content="Every form field in one panel, live page preview, flatten and download. Runs 100% in your browser.">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+<script src="lib/pdf-lib.min.js"></script>
+<!--s3:seo-->
+<link rel="canonical" href="https://s3eidat.github.io/pdf-fill/">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0d0f12">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="S3eidat Tools">
+<meta property="og:url" content="https://s3eidat.github.io/pdf-fill/">
+<meta property="og:image" content="https://s3eidat.github.io/pdf-fill/screenshot.png">
+<meta property="og:image:width" content="1280"><meta property="og:image:height" content="800">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PDF Form Filler — Fill in PDF forms in your browser">
+<meta name="twitter:description" content="Fill in PDF forms in your browser. Free, private and runs 100% in your browser: no sign-up, no uploads.">
+<meta name="twitter:image" content="https://s3eidat.github.io/pdf-fill/screenshot.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "PDF Form Filler", "url": "https://s3eidat.github.io/pdf-fill/", "description": "Fill in PDF forms in your browser. Free, private and runs 100% in your browser: no sign-up, no uploads.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "image": "https://s3eidat.github.io/pdf-fill/screenshot.png", "author": {"@type": "Person", "name": "s3eidat", "url": "https://github.com/s3eidat"}}</script>
+<!--/s3:seo-->
+</head>
+<body data-tool="pdf-fill">
+<main class="s3-main">
+  <section class="s3-hero">
+    <h1>PDF Form Filler</h1>
+    <p>Open a fillable PDF and every field appears in one tidy panel, page by page, with a live preview. Fill it, flatten it if you like, download. The file never leaves this device.</p>
+  </section>
+
+  <section class="card" id="dropCard">
+    <label class="drop" id="drop">
+      <input type="file" accept=".pdf,application/pdf" hidden>
+      <svg class="i"><use href="#i-upload"/></svg>
+      <b>Drop a fillable PDF here</b>
+      <span>or click to choose one</span>
+    </label>
+  </section>
+
+  <section class="card" id="noForm" hidden>
+    <div class="empty">
+      <b>This PDF has no fillable form fields</b>
+      <p class="pf-empty-p">It's a flat document, so there is nothing here to fill in. To type text, add a date or sign anywhere on it, use <a href="/pdf-sign/">PDF Sign</a>: it places text boxes and signatures on any page.</p>
+      <div class="row pf-empty-row">
+        <button class="btn" id="noFormOther"><svg class="i"><use href="#i-refresh"/></svg>Try another file</button>
+        <a class="btn primary" href="/pdf-sign/">Open PDF Sign</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="pf-layout" id="work" hidden>
+    <section class="card pf-view">
+      <div class="row between">
+        <div class="row pf-fname"><svg class="i"><use href="#i-file"/></svg><b id="fname"></b></div>
+        <div class="row">
+          <button class="btn icon small" id="prev" aria-label="Previous page">‹</button>
+          <span class="chip" id="pageNo"></span>
+          <button class="btn icon small" id="next" aria-label="Next page">›</button>
+        </div>
+      </div>
+      <div class="pf-stage mt"><div class="pf-page" id="page"><div class="pf-ov" id="ov"></div></div></div>
+      <p class="faint pf-legend">Highlighted boxes are form fields. Click one to jump to it. The preview shows your entries as you type.</p>
+    </section>
+
+    <section class="card pf-side">
+      <div class="row between">
+        <h2>Fields <small id="count"></small></h2>
+        <div class="row">
+          <button class="btn ghost small" id="clear">Clear all</button>
+          <button class="btn ghost small" id="reset" title="Back to the values the file came with">Reset</button>
+        </div>
+      </div>
+      <div id="xfa" class="pf-warn" hidden></div>
+      <div class="pf-fields" id="fields"></div>
+      <div class="pf-foot">
+        <label class="check"><input type="checkbox" id="flatten"> Flatten (make the answers permanent, no longer editable)</label>
+        <button class="btn primary big" id="save"><svg class="i"><use href="#i-download"/></svg>Download filled PDF</button>
+        <button class="btn ghost small" id="change"><svg class="i"><use href="#i-refresh"/></svg>Open another PDF</button>
+      </div>
+    </section>
+  </div>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
